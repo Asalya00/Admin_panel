@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz for therapists</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Initialize EmailJS with your service ID
+            emailjs.init('YOUR_EMAILJS_SERVICE_ID');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            const form = document.getElementById("therapistForm");
+
+            function submitForm() {
+                // Use AJAX to submit the form to the PHP page
+                const xhr = new XMLHttpRequest();
+                const url = form.action;
+                const formData = new FormData(form);
+
+                xhr.open("POST", url, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // Handle the successful submission response here if needed
+                            window.location.href = "../thankyou/thankyou.html";
+                        } else {
+                            // Handle the error response here if needed
+                            alert("Form submission failed. Please try again later.");
+                        }
+                    }
+                };
+
+                xhr.send(formData);
+            }
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                // Use EmailJS to send the form data via email
+                emailjs.sendForm('YOUR_EMAILJS_SERVICE_ID', 'YOUR_EMAILJS_TEMPLATE_ID', this)
+                    .then(function(response) {
+                        console.log('EmailJS SUCCESS!', response);
+                        // Once the email is sent successfully, submit the form to the PHP script
+                        submitForm();
+                    }, function(error) {
+                        console.error('EmailJS FAILED...', error);
+                        // Handle EmailJS errors here
+                        alert("Email sending failed. Please try again later.");
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Welcome</h1>
+        <p>To MoodSphere</p>
+    </header>
+    <form id="therapistForm" action="process_form.php" method="POST">
+        <div id="container">
+            <p>ID number</p>
+            <input type="number" placeholder="Enter id" required name="id">
+            <p>Name</p>
+            <input type="text" placeholder="Enter your name" required name="name">
+            <p>Age</p>
+            <input type="number" min="10" max="99" required name="age">
+            <p>Email</p>
+            <input type="email" placeholder="Enter your email" required name="email">
+            <p>Your current role?</p>
+            <select id="role" name="role">
+                <option value="0">(select one)</option>
+                <option value="1">Student</option>
+                <option value="2">Full Time Job</option>
+                <option value="3">Part Time Job</option>
+            </select>
+            <p>What is your gender</p>
+            <label for="Female"> <input type="radio" id="Female" name="gender" value="Female" required>Female</label>
+            <label for="Male"> <input type="radio" id="Male" name="gender" value="Male" required>Male</label>
+            <label for="Other"> <input type="radio" id="Other" name="gender" value="Other" required>Other</label>
+            <p>Your Diploma/Degree</p>
+            <input type="text" placeholder="Enter your diploma/degree" required name="diplomadegree">
+            <p>Where did you get your Diploma/Degree</p>
+            <input type="text" placeholder="Enter your university" required name="university">
+            <p>How many years required for the diploma/degree</p>
+            <input type="number" min="2" max="6" required name="yearsfordegree">
+            <p>What is your specialty about Physiology? (Check all that apply)</p>
+            <label for=""> <input type="checkbox" name="speciality[]" value="Child and adolescent psychiatry"> Child and adolescent psychiatry. </label>
+            <label for=""><input type="checkbox" name="speciality[]" value="Forensic psychiatry"> Forensic psychiatry. </label>
+            <label for=""><input type="checkbox" name="speciality[]" value="General psychiatry"> General psychiatry. </label>
+            <label for=""><input type="checkbox" name="speciality[]" value="Liaison psychiatry"> Liaison psychiatry. </label>
+            <label for=""><input type="checkbox" name="speciality[]" value="Medical psychotherapy"> Medical psychotherapy. </label>
+            <label for=""><input type="checkbox" name="speciality[]" value="Old age psychiatry"> Old age psychiatry. </label>
+            <label for=""><input type="checkbox" name="speciality[]" value="Psychiatry of intellectual disability"> Psychiatry of intellectual disability. </label>
+            <br>
+            <label for="">Any other qualifications?<input type="text" placeholder="Enter here..." name="qualifications"></label>
+            <p>Did you train under a counsellor?</p>
+            <label for="counsellorYes"> <input type="radio" id="counsellorYes" name="counsellor" value="Yes" required>Yes</label>
+            <label for="counsellorNo"> <input type="radio" id="counsellorNo" name="counsellor" value="No" required>No</label>
+            <p>If you trained, how many years did you train? </p>
+            <input type="number" min="2" max="50" required name="counsellortrainyears">
+            <p>Did you train under a psychiatrist?</p>
+            <label for="psychiatristYes"> <input type="radio" id="psychiatristYes" name="psychiatrist" value="Yes" required>Yes</label>
+            <label for="psychiatristNo"> <input type="radio" id="psychiatristNo" name="psychiatrist" value="No" required>No</label>
+            <p>If you trained, how many years did you train? </p>
+            <input type="number" min="2" max="50" required name="psychiatristtrainyears">
+            <label for="">Any other experiences?<input type="text" placeholder="Enter here..." name="experience"></label>
+        </div>
+        <div>
+            <button type="submit" class="btn" name="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

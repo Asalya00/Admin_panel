@@ -1,0 +1,63 @@
+/* admin_panel.css */
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+/* Header styles */
+h1 {
+    color: #333;
+    margin-top: 40px;
+}
+
+/* Container styles */
+.container {
+    max-width: 100%; /* Ensure the container doesn't exceed the screen width */
+    width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Paragraph styles */
+p {
+    color: #333;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* Logout button styles */
+.logout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d9534f; /* Red color for danger */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #c9302c; /* Darker red color on hover */
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 90%; /* Adjust the width for smaller screens */
+    }
+}
