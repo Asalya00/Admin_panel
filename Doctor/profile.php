@@ -13,7 +13,7 @@ $conn = new mysqli('localhost', 'root', '', 'counsellingapp');
 if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);
 } else {
-    $userID = $_SESSION['doctor_id']; // Assuming 'doctor_id' is the session variable name
+    $userID = $_SESSION['UserID'];
     $sql = "SELECT * FROM users WHERE id = '$userID'";
     $result = mysqli_query($conn, $sql);
     
@@ -45,7 +45,6 @@ if ($conn->connect_error) {
     <title>User Profile</title>
     <link rel="stylesheet" href="profile.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <a href="book.php?doctor_id=<?php echo $userID; ?>">Book Appointment</a>
 </head>
 
 <body>

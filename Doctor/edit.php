@@ -149,6 +149,7 @@ if ($conn->connect_error) {
                 document.getElementById("password").onchange = validatePassword;
             </script>
         </form>
+        <button onclick="location.href='Profile.php'">Go back to Profile</button>
     </div>
 </body>
 </html>

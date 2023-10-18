@@ -1,9 +1,6 @@
 <?php
 session_start(); // Start the session
 
-// Retrieve user ID from the query parameter
-$userID = isset($_GET['user_id']) ? $_GET['user_id'] : 0;
-
 // Database connection parameters
 $servername = 'localhost';
 $username = 'root';
@@ -22,36 +19,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $patientName = isset($_POST['patient_name']) ? $_POST['patient_name'] : "";
     $patientEmail = isset($_POST['patient_email']) ? $_POST['patient_email'] : "";
     $appointmentDate = $_POST['appointment_date'];
-    $appointmentTime = $_POST['appointment_start_time'];
+    $appointmentStartTime = $_POST['appointment_start_time'];
     $appointmentEndTime = $_POST['appointment_end_time'];
     $appointmentReason = $_POST['appointment_reason'];
 
     // Assuming 'doctor_id' is stored in a session variable
-$doctorId = isset($_SESSION['doctor_id']) ? $_SESSION['doctor_id'] : 0;
-
-// Insert booked appointment into the appointments table
-$insertSql = "INSERT INTO appointments (patient_name, patient_email, appointment_date, appointment_start_time, appointment_end_time, appointment_reason, DoctorID)
-              VALUES ('$patientName', '$patientEmail', '$appointmentDate', '$appointmentTime', '$appointmentEndTime', '$appointmentReason', '$doctorId')";
-              
+    $doctorId = isset($_GET['doctor_id']) ? $_GET['doctor_id'] : 0;
+    $userID = $_SESSION['UserID'];
+        
     // Check if the appointment slot is available
-    $availabilitySql = "SELECT * FROM appointments WHERE user_id = '$userId' AND appointment_date = '$appointmentDate' AND ((appointment_start_time <= '$appointmentTime' AND appointment_end_time > '$appointmentTime') OR (appointment_start_time < '$appointmentEndTime' AND appointment_end_time >= '$appointmentEndTime'))";
+    $availabilitySql = "SELECT * FROM appointments WHERE DoctorID = '$doctorId' AND appointment_date = '$appointmentDate' AND ((appointment_start_time <= 'appointmentStartTime' AND appointment_end_time > '$appointmentStartTime') OR (appointment_start_time < '$appointmentEndTime' AND appointment_end_time >= '$appointmentEndTime'))";
     
     $availabilityResult = $conn->query($availabilitySql);
     
     if ($availabilityResult && $availabilityResult->num_rows > 0) {
-        echo "This appointment slot is already booked. Please choose a different time.";
+        echo "This appointment slot is already booked. Please choose a different time." . $conn->error . " <a href='book.php'>Go back to Book Appointment</a>";
     } else {
         // Insert booked appointment into the appointments table
-        $insertSql = "INSERT INTO appointments (patient_name, patient_email, appointment_date, appointment_start_time, appointment_end_time, appointment_reason, user_id)
-                      VALUES ('$patientName', '$patientEmail', '$appointmentDate', '$appointmentTime', '$appointmentEndTime', '$appointmentReason', '$userId')";
+        $insertSql = "INSERT INTO appointments (patient_name, patient_email, appointment_date, appointment_start_time, appointment_end_time, appointment_reason, PaitentID, DoctorID)
+                      VALUES ('$patientName', '$patientEmail', '$appointmentDate', '$appointmentStartTime', '$appointmentEndTime', '$appointmentReason', '$userID', '$doctorId')";
 
-        if ($conn->query($insertSql) === TRUE) {
-            echo "Appointment booked successfully.";
-        } else {
-            echo "Error booking the appointment: " . $conn->error;
-        }
+if ($conn->query($insertSql) === TRUE) {
+    // If the appointment is booked successfully, display a button to go to profile.php
+    echo "Appointment booked successfully. <a href='Viewprofile.php'>Go back to Profile</a>";
+} else {
+    // If there is an error, display a button to go back to book.php
+    echo "Error booking the appointment: " . $conn->error . " <a href='book.php'>Go back to Book Appointment</a>";
+}
     }
-    header('Location: all.php');
     exit;
 }
 
@@ -82,5 +77,6 @@ $conn->close();
         <textarea id="appointment_reason" name="appointment_reason" rows="4" required></textarea>
         <button type="submit">Book Appointment</button>
     </form>
+    <button onclick=History. back()>Go back to Profile</button>
 </body>
 </html>

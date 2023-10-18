@@ -27,11 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insertSql = "INSERT INTO time (user_id, appointment_date, appointment_start_time, appointment_end_time, appointment_day)
                   VALUES ('$userID', '$appointmentDate', '$appointmentStartTime', '$appointmentEndTime', '$appointmentDay')";
 
-    if ($conn->query($insertSql) === TRUE) {
-        echo "Available time slot added successfully.";
-    } else {
-        echo "Error adding the available time slot: " . $conn->error;
-    }
 }
 ?>
 
@@ -53,5 +48,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="time" id="appointment_end_time" name="appointment_end_time" required>
         <button type="submit">Add Time Slot</button>
     </form>
+    <button onclick="location.href='Profile.php'">Go back to Profile</button>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($conn->query($insertSql) === TRUE) {
+            // If the time slot is added successfully, display a success message as a button
+            echo '<button onclick="location.href=\'profile.php\'">Available time slot added successfully</button>';
+        } else {
+            // If there is an error, display an error message as a button
+            echo '<button onclick="location.href=\'availableTimes.php\'">Error adding the available time slot: ' . $conn->error . '</button>';
+        }
+    }
+    ?>
 </body>
 </html>

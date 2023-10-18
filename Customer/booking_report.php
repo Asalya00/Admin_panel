@@ -10,7 +10,7 @@ if ($conn->connect_error) {
 
 $doctorId = isset($_SESSION['doctor_id']) ? $_SESSION['doctor_id'] : 0;
 
-$sql = "SELECT * FROM appointments WHERE doctor_id = '$doctorId'"; // Modify this query based on your database schema
+$sql = "SELECT * FROM appointments WHERE DoctorID = '$doctorId'"; // Modify this query based on your database schema
 $result = mysqli_query($conn, $sql);
 if (!$result) {
     die('Error executing the query: ' . mysqli_error($conn));
@@ -21,10 +21,10 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <title>Booking Report</title>
-    <link rel="stylesheet" href="report.css">
+    <link rel="stylesheet" href="booking_report.css">
 </head>
 <body>
-    <h1>Booking Report</h1>
+    <h1>Patient Reports</h1>
     <table>
         <tr>
             <th>Patient Name</th>
@@ -41,6 +41,9 @@ if (!$result) {
         }
         ?>
     </table>
+    <form action="../Doctor/profile.php" method="get">
+        <button type="submit">Go back to Profile</button>
+    </form>
 </body>
 </html>
 

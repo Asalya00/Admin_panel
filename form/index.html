@@ -6,17 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz for therapists</title>
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // Initialize EmailJS with your service ID
-            emailjs.init('YOUR_EMAILJS_SERVICE_ID');
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('hb0q0cmq03uAV4IpR');
         })();
     </script>
     <script type="text/javascript">
         window.onload = function() {
             const form = document.getElementById("therapistForm");
-
             function submitForm() {
                 // Use AJAX to submit the form to the PHP page
                 const xhr = new XMLHttpRequest();
@@ -39,23 +38,20 @@
 
                 xhr.send(formData);
             }
-
-            form.addEventListener('submit', function(event) {
+            document.getElementById('therapistForm').addEventListener('submit', function(event) {
                 event.preventDefault();
-                // Use EmailJS to send the form data via email
-                emailjs.sendForm('YOUR_EMAILJS_SERVICE_ID', 'YOUR_EMAILJS_TEMPLATE_ID', this)
-                    .then(function(response) {
-                        console.log('EmailJS SUCCESS!', response);
-                        // Once the email is sent successfully, submit the form to the PHP script
+                // these IDs from the previous steps
+                emailjs.sendForm('service_vjdaafq', 'template_kdcwych', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
                         submitForm();
                     }, function(error) {
-                        console.error('EmailJS FAILED...', error);
-                        // Handle EmailJS errors here
-                        alert("Email sending failed. Please try again later.");
+                        console.log('FAILED...', error);
                     });
             });
         }
     </script>
+
 </head>
 <body>
     <header>
@@ -112,7 +108,8 @@
             <label for="">Any other experiences?<input type="text" placeholder="Enter here..." name="experience"></label>
         </div>
         <div>
-            <button type="submit" class="btn" name="submit">Submit</button>
+            <button type="submit" class="btn" value="submit" name="submit">Submit</button>
+            <button onclick="location.href='home.php'">Go back</button>
         </div>
     </form>
 </body>
