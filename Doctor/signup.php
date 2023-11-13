@@ -18,7 +18,7 @@
         if($conn->connect_error){
             die('connection Failed :' .$conn->connect_error);
         } else{
-            $sql= "SELECT id FROM users WHERE Email='$email' ORDER BY id DESC LIMIT 1;";
+            $sql= "SELECT id FROM doctors WHERE Email='$email' ORDER BY id DESC LIMIT 1;";
         
             $result = mysqli_query($conn,$sql);
         
@@ -29,7 +29,7 @@
                 echo '<a href="index.php" class="redirect-button">Go Back</a>';
             } else {
         
-                $sql= "SELECT id FROM users ORDER BY id DESC LIMIT 1;";
+                $sql= "SELECT id FROM doctors ORDER BY id DESC LIMIT 1;";
 
                 $result = mysqli_query($conn,$sql);
 
@@ -86,7 +86,7 @@
                 }
 
 
-                $sql = "INSERT INTO users (id, name, email, password, profile_photo)
+                $sql = "INSERT INTO doctors (id, name, email, password, profile_photo)
                         VALUES ('".sprintf("%'.010d", $uid)."','$name','$email','".md5($password)."','".$imageLocation."')";
                 if ($conn->query($sql) === TRUE){
                     echo"Registration Complete You can login using your username and password";

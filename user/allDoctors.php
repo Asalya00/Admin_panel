@@ -1,10 +1,22 @@
+<?php 
+
+// Start the session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['LogedIn']) || $_SESSION['LogedIn'] !== TRUE) {
+    header('Location: login.php');
+    exit;
+}
+
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>All User Profiles</title>
-    <link rel="stylesheet" href="all.css">
+    <link rel="stylesheet" href="allDoctors.css">
 </head>
 <body>
     <header>
@@ -15,19 +27,11 @@
         <form action="" method="post">
             <input type="text" name="search" placeholder="Search Counselor Name">
             <button type="submit">Search</button>
+            <a href="profile.php" class="profile-link">Go Back to Profile</a>
         </form>
     </div>
 
     <?php
-    // Start the session
-    session_start();
-
-    // Check if the user is logged in
-    if (!isset($_SESSION['LogedIn']) || $_SESSION['LogedIn'] !== TRUE) {
-        header('Location: login.php');
-        exit;
-    }
-
    
     // Connect to the database (Replace these values with your actual database credentials)
     $conn = new mysqli('localhost','root','','counsellingapp');
@@ -36,7 +40,7 @@
     }
 
     // Retrieve all user profiles from the database
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM doctors";
     
     // Check if the search form is submitted
     if (isset($_POST['search'])) {
@@ -54,7 +58,7 @@
         // Loop through each user Doctor and display their name and Doctor photo with a link to their Doctor
         while ($row = $result->fetch_assoc()) {
             echo '<div class="profile">';
-            echo '<a href="viewProfile.php?id=' . urlencode($row['id']) . '">'; // Updated link to Doctor.php
+            echo '<a href="ViewDoctorProfile.php?id=' . urlencode($row['id']) . '">'; // Updated link to Doctor.php
             echo '<img src="../Doctor/' . $row['profile_photo'] . '" alt="Profile Photo">';
             echo '<p>' . $row['name'] . '</p>';
             echo '</a>';

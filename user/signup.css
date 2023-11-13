@@ -1,0 +1,63 @@
+/* Container for the registration form */
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Form title */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Form fields */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Gender selector */
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Image upload field */
+input[type="file"] {
+    margin: 5px 0;
+}
+
+/* Submit button */
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Error message */
+.error {
+    color: red;
+    margin: 5px 0;
+}
+
+/* Success message */
+.success {
+    color: green;
+    margin: 5px 0;
+}

@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);
 } else {
     $userID = $_SESSION['UserID'];
-    $sql = "SELECT * FROM users WHERE id = '$userID'";
+    $sql = "SELECT * FROM doctors WHERE id = '$userID'";
     $result = mysqli_query($conn, $sql);
 
     if ($result === FALSE || mysqli_num_rows($result) == 0) {
@@ -66,7 +66,7 @@ if ($conn->connect_error) {
             }
         }
 
-        $updateSql = "UPDATE users SET name=?, email=?, age=?, gender=?, therapy_type=?, whatsapp=?, facebook=?, experience=?, quote=?";
+        $updateSql = "UPDATE doctors SET name=?, email=?, age=?, gender=?, therapy_type=?, whatsapp=?, facebook=?, experience=?, quote=?";
         $params = array($updatedName, $updatedEmail, $updatedAge, $updatedGender, $updatedTherapyType, $updatedWhatsapp, $updatedFacebook, $updatedExperience, $updatedQuote);
 
         if (isset($updatedPassword)) {

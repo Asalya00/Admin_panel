@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);
 } else {
     $doctorID = $_GET['id'];
-    $sql = "SELECT * FROM users WHERE id = '$doctorID'";
+    $sql = "SELECT * FROM doctors WHERE id = '$doctorID'"; 
     $result = mysqli_query($conn, $sql);
 
     if ($result === FALSE || mysqli_num_rows($result) == 0) {
@@ -43,7 +43,7 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <title>User Profile</title>
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="Viewprofile.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -117,5 +117,6 @@ if ($conn->connect_error) {
     ?>
 </div>
 </div>
+<a href="allDoctors.php" class="profile-link">Go Back</a>
 </body>
 </html>

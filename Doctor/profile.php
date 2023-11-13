@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);
 } else {
     $userID = $_SESSION['UserID'];
-    $sql = "SELECT * FROM users WHERE id = '$userID'";
+    $sql = "SELECT * FROM doctors WHERE id = '$userID'";
     $result = mysqli_query($conn, $sql);
     
     if ($result === FALSE || mysqli_num_rows($result) == 0) {
@@ -123,7 +123,7 @@ if ($conn->connect_error) {
         ?>
          <!-- Link to the Booking Report page -->
     <div class="booking-report-link">
-        <a href="../Customer/booking_report.php">View Booking Report</a>
+        <a href="../user/booking_report.php">View Booking Report</a>
     </div>
     </div>
 </div>

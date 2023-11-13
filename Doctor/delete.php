@@ -25,7 +25,7 @@ if ($conn->connect_error) {
 $userID = $_SESSION['UserID'];
 
 // Delete the user's Doctor
-$deleteSql = "DELETE FROM users WHERE id = '$userID'";
+$deleteSql = "DELETE FROM doctors WHERE id = '$userID'";
 if ($conn->query($deleteSql) === TRUE) {
     // Unset all of the session variables and destroy the session
     session_unset();

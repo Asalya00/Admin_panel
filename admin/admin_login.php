@@ -12,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $inputPassword = $_POST['password'];
 
     // Database connection parameters
-$servername = 'localhost';
-$username = 'root';
-$dbpassword = '';
-$dbName = 'counsellingapp';
+    $servername = 'localhost';
+    $username = 'root';
+    $dbpassword = '';
+    $dbName = 'counsellingapp';
 
     $conn = new mysqli($servername, $username, $dbpassword, $dbName);
 
@@ -33,7 +33,7 @@ $dbName = 'counsellingapp';
         $stmt->bind_result($adminId, $adminUsername, $adminHashedPassword);
         $stmt->fetch();
         // Verify the password
-        if ($inputPassword==$adminHashedPassword) {
+        if ($inputPassword == $adminHashedPassword) {
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_id'] = $adminId; // You can store the admin ID in the session for future use if needed
             header('Location: admin_panel.php');
@@ -81,4 +81,3 @@ $dbName = 'counsellingapp';
     </div>
 </body>
 </html>
-

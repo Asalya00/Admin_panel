@@ -20,7 +20,7 @@
         if ($conn->connect_error) {
             die('Connection Failed: ' . $conn->connect_error);
         } else {
-            $sql = "SELECT * FROM users WHERE Email = '$email' AND Password = '" . md5($password) . "'";
+            $sql = "SELECT * FROM doctors WHERE Email = '$email' AND Password = '" . md5($password) . "'";
 
             $result = mysqli_query($conn, $sql);
             if ($result == False) {

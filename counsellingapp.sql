@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 18, 2023 at 10:29 AM
+-- Generation Time: Oct 26, 2023 at 05:31 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -73,6 +73,38 @@ INSERT INTO `appointments` (`id`, `PaitentID`, `patient_name`, `patient_email`, 
 (3, '0000000001', 'asdf', 'gunarathneasalya95@gmail.com', '0', '2023-10-25', '04:13:00', '05:13:00', 'nnnnnnnnnnnnnn'),
 (4, '0000000001', 'asdf', 'gunarathneasalya95@gmail.com', '0', '2023-10-12', '15:17:00', '17:14:00', 'nnnnnnnnnnnnn'),
 (5, '0000000001', 'asdf', 'gunarathneasalya95@gmail.com', '0', '2023-10-20', '18:18:00', '19:18:00', 'hhhhhhhhhhhhhh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctors`
+--
+
+DROP TABLE IF EXISTS `doctors`;
+CREATE TABLE IF NOT EXISTS `doctors` (
+  `id` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `age` int DEFAULT NULL,
+  `gender` enum('Male','Female','Other','') DEFAULT NULL,
+  `therapy_type` varchar(50) DEFAULT NULL,
+  `whatsapp` varchar(20) DEFAULT NULL,
+  `facebook` varchar(100) DEFAULT NULL,
+  `experience` text,
+  `quote` varchar(255) DEFAULT NULL,
+  `profile_photo` varchar(255) DEFAULT NULL,
+  `confirm_password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `doctors`
+--
+
+INSERT INTO `doctors` (`id`, `email`, `name`, `password`, `age`, `gender`, `therapy_type`, `whatsapp`, `facebook`, `experience`, `quote`, `profile_photo`, `confirm_password`) VALUES
+('0000000002', 'gunarathne@gmail.com', 'asalya', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/0000000002Doctorpng', NULL),
+('0000000001', 'gunarathneasalya95@gmail.com', 'PIG', '88e81740471c79f558cbaefae0d36cb2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/0000000001Doctorpng', NULL);
 
 -- --------------------------------------------------------
 
@@ -156,28 +188,23 @@ INSERT INTO `time` (`id`, `user_id`, `appointment_date`, `appointment_start_time
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `password` varchar(250) NOT NULL,
-  `age` int DEFAULT NULL,
-  `gender` enum('Male','Female','Other','') DEFAULT NULL,
-  `therapy_type` varchar(50) DEFAULT NULL,
-  `whatsapp` varchar(20) DEFAULT NULL,
-  `facebook` varchar(100) DEFAULT NULL,
-  `experience` text,
-  `quote` varchar(255) DEFAULT NULL,
-  `profile_photo` varchar(255) DEFAULT NULL,
-  `confirm_password` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `gender` enum('male','female','other') NOT NULL,
+  `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `name`, `password`, `age`, `gender`, `therapy_type`, `whatsapp`, `facebook`, `experience`, `quote`, `profile_photo`, `confirm_password`) VALUES
-('0000000001', 'gunarathneasalya95@gmail.com', 'PIG', '88e81740471c79f558cbaefae0d36cb2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/0000000001Doctorpng', NULL);
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `gender`, `image`) VALUES
+(3, 'Asalya', 'Dissanayake', 'gunarathneasalya95@gmail.com', '$2y$10$7kC1FtjAt2m4mjwm8g9m/OdgHlVQ/JA0HPOJ2vveTDS47d1kOSZJi', 'female', 'uploads/Screenshot (127).png'),
+(2, 'Mahela', 'Dissanayake', '2021t01206@stu.cmb.ac.lk', '$2y$10$5lxj0eXKm/wbmqvk.OcpcOX30xUmOh.6Ugk5tXnRqnscAcjtWNa1y', 'female', 'uploads/Screenshot (127).png');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
